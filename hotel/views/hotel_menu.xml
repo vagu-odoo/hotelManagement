@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<odoo>
+    <menuitem
+        id="hotel_menu_root"
+        name="hotel"/>
+
+    <menuitem
+        id="hotel_menu_rooms"
+        name="rooms"
+        parent="hotel_menu_root"/>
+
+    <menuitem
+        id="hotel_bookings"
+        name="Bookings"
+        parent="hotel_menu_root"/>     
+
+    <menuitem
+        id="hotel_room_test"
+        name="All Rooms"
+        parent="hotel_menu_rooms"
+        action="hotel_rooms_action"
+    />
+    <menuitem
+        id="hotel_room_types"
+        name="Room Types"
+        parent="hotel_menu_rooms"
+        action="hotel_room_types_action"
+    />
+    <menuitem
+        id="hotel_room_bookings"
+        name="All Room Bookings"
+        parent="hotel_bookings"
+        action="hotel_bookings_action"
+    />
+
+</odoo>

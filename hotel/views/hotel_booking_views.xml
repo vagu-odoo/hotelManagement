@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<odoo>
+      <record id="hotel_bookings_action" model="ir.actions.act_window">
+        <field name="name">test</field>
+        <field name="res_model">hotel.booking</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <record id="hotel_bookings_view_tree" model="ir.ui.view">
+            <field name="name">hotel.bookings.view.tree</field>
+            <field name="model">hotel.booking</field>
+                <field name="arch" type="xml">
+                    <tree string="Channel">
+                        <field name="name" string="Name"/>
+                        <field name="room_id" string="Room"/>
+                        <field name="room_type_id" string="Room Type"/>
+                        <field name="status" string="Status"/>
+                    </tree>
+                </field>
+    </record>
+
+     <record id="hotel_bookings_view_form" model="ir.ui.view">
+            <field name="name">hotel.bookings.view.form</field>
+            <field name="model">hotel.booking</field>
+                <field name="arch" type="xml">
+                    <form string="Booking Details">
+                <header>
+                    <field name="status" string ="Status" widget="statusbar" statusbar_visible="available ,occupied"/>
+                </header>
+                <sheet>
+                   
+                    <separator/>
+                    <group> 
+                        <group>
+                            <field name="customer" string="Customer Name"/>
+                            <field name="email" string="Email"/>
+                            <field name="booking_date" string="Booking date"/>
+                        </group>
+                        <group>
+                            <field name="room_id" string="Room"/>
+                            <field name="room_type_id" string="Category"/>
+                            <!-- <field name="room_id.price" string="Price"/> -->
+                            <field name="phone" string="Contact No."/>
+                        </group>
+                    </group>
+                    
+
+                </sheet>
+            </form>
+                </field>
+    </record>
+</odoo>
