@@ -1,59 +1,158 @@
-<?xml version='1.0'?>
-<odoo> 
- 
- <template id="rooms_page_view">
+<?xml version="1.0"?>
+<odoo>
+    <template id="rooms_page_view">
         <title>Rooms</title>
-
         <t t-call="website.layout">
-            <!-- <form style="padding:0px 50px" class="align-items-right" action="/estate/property">
-                    <input type="date" name="date_picker_filter" pattern="\d{4}-\d{2}-\d{2}"/>
-                    <input type="submit" class="btn btn-primary" value="Listed After"/>
-            </form> -->
-               
-                        <section>
+            <section>
 
-                            <div>
-                                <center>
-                                    <h3>All Rooms</h3>
-                                </center>
-                            </div>
-
-                            <div class="row row-cols row-cols-md-3 g-4">
-                                <t t-foreach="rooms" t-as="room">
-                                <!-- <a t-attf-href="/estate/property/{{ slug(property) }}"> -->
-                                    <div class="col">
-                                        <div class="card h-100 w-75">
-                                            <t t-if="room.image">
-                                                <img t-att-src="image_data_uri(room.image)"
-                                                    alt="Not Found"
-                                                    class="card-img-top img-fluid"
-                                                    style="height:250px;width:500px"
-                                                />
-                                            </t>
-                                            <!-- <t t-else="">
-                                                        <img src="/estate/static/images.png" class="card-img-top" alt="..."/>
-                                                    </t> -->
-                                            <div class="card-body">
-
-                                                <t t-esc="room.room_number" />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- </a> -->
+                <div>
+                    <center>
+                        <h3>All Rooms</h3>
+                    </center>
+                </div>
+                <div class="row row-cols row-cols-md-3 g-4">
+                    <t t-foreach="rooms" t-as="room">
+                     <a t-attf-href="/hotel/{{ slug(room) }}">
+                        <div class="col">
+                            <div class="card h-100 w-75">
+                                <t t-if="room.image">
+                                    <img t-att-src="image_data_uri(room.image)"                      
+                                        alt="Not Found"
+                                        class="card-img-top img-fluid"
+                                        style="height:250px;width:500px"
+                                    />
                                 </t>
+                                <t t-else="">
+                                            <img src="/hotel/static/images.png" class="card-img-top" alt="..."/>
+                                </t>
+                                <div class="card-body">
+
+                                    <t t-esc="room.room_number" />
+
+                                </div>
                             </div>
-                            <div
+                        </div>
+                        </a>
+                    </t>
+                </div>
+                <div
                                 class="products_pager form-inline justify-content-center mt-3">
                                 <t t-call="website.pager">
-                                    <!-- <t t-set="_classes">mt-2 ml-md-2</t> -->
+                                    <t t-set="_classes">mt-2 ml-md-2</t>
                                 </t>
                             </div>
-                        </section>
-                        <br />
-                        <hr class="border-600 s_hr_1px w-100 mx-auto s_hr_dotted" />
-                        
-            
+            </section>
         </t>
     </template>
+
+    <template id="room_details_page_view">
+        <t t-call="website.layout">
+            <t t-set="title">Room Details</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t >
+                        <p>
+                            <h1>
+                            <strong>Room:</strong>
+                                <t t-esc="room.room_number"/>
+                            </h1>
+                        </p>
+                        <div class="container mt-5">
+                            <div class="row">
+                                <!-- Property Image (on the left) -->
+                                <t t-if="room.image">
+                                <div class="col-sm-6">
+                                    <img t-att-src="image_data_uri(room.image)"  alt="Not Found" height="400" width="500"/>
+                                </div>
+                                </t>
+                                <!-- Room Details Card (on the right) -->
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <b>Description:</b>
+                                            <!-- <p class="card-text">
+                                                <t t-esc="room.description"/>
+                                            </p> -->
+                                            <p class="card-text">
+                                                <strong>Expected Price:</strong>
+                                                <t t-esc="room.price"/>
+                                            </p>
+                                            <p class="card-text">
+                                                <strong>Maximum Adults:</strong>
+                                                <t t-esc="room.max_adult"/>
+                                            </p>
+                                            <p class="card-text">
+                                                <strong>Maximum Child:</strong>
+                                                <t t-esc="room.max_child"/>
+                                            </p>
+                                             <p class="card-text">
+                                                <strong>Category</strong>
+                                                <t t-esc="room.room_type_id.name"/>
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                     <div>
+                                     <a t-attf-href="/hotel/book_room/{{ slug(room) }}">
+                                        <button name="" class="btn btn-primary" type="object" title="Book Now" >BOOK ROOM</button>
+                                     </a>
+                                        
+
+                                </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <p></p>
+
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="booking_form">
+    <t t-call="website.layout">
+        <t t-set="title">Book Room</t>
+        <div class="oe_structure">
+            <div class="container">
+                <h1>Book Room</h1>
+                <form method="post" action="/confirm_booking">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="room_id" t-att-value="room.id"/>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" /><br/>
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" /><br/>
+                    <label for="booking_date">Booking Date:</label>
+                    <input type="date" id="booking_date" name="booking_date" /><br/>
+                    <!-- Add more fields as needed -->
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </t>
+</template>
+
+
+
+    <!-- <template id="property_details_page_view1">
+        <t t-call="website.layout">
+            <title>Property Detail</title>
+            <t t-foreach="property" t-as="prop">
+                <p><t t-esc="prop.name"/></p>
+                <p>Expected Price: <t t-esc="prop.expected_price"/></p>
+                <p>Salesman: <t t-esc="prop.seller.name"/></p>
+            </t>
+        </t>
+    
+    </template> -->
+
+    <record id="menu_rooms" model="website.menu">
+        <field name="name">Rooms</field>
+        <field name="url">/hotel</field>
+        <field name="sequence" type="int">10</field>
+        <field name="parent_id" ref="website.main_menu"/>
+    </record>
 </odoo>

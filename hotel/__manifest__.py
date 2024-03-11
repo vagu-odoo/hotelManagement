@@ -2,6 +2,7 @@
     'name': 'hotel',
     'depends':[
         'base',
+        'website',
     ],
     'installable': True,
     'application': True,

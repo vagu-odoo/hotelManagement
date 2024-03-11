@@ -36,6 +36,7 @@
                     <separator/>
                     <group>
                         <group>
+                            <field name="image" string="Image"/>
                             <field name="room_type_id" string="Category"/>
                             <field name="status" string="status"/>
                         </group>

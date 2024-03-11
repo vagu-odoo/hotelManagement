@@ -1,4 +1,4 @@
-from odoo import http
+from odoo import http,api
 from odoo.http import request
 
 class Hotel(http.Controller):
@@ -12,8 +12,69 @@ class Hotel(http.Controller):
         )
         offset = pager['offset']
         rooms = rooms[offset: offset + 6]
-
         return http.request.render('hotel.rooms_page_view',{
             'rooms':rooms,
             'pager':pager
         })
+    
+    
+
+    @http.route('/hotel/<model("hotel.room"):room_details>/', auth='public', website=True)
+    def room_details(self, room_details):
+        return http.request.render('hotel.room_details_page_view', {
+        'room': room_details
+    })
+
+
+    @http.route('/hotel/book_room/<model("hotel.room"):room_details>/', auth='public', website=True)
+    def book_room(self, room_details):
+        return http.request.render('hotel.booking_form', {
+        'room': room_details
+    })
+
+
+    # @http.route('/confirm_booking', type='http', auth='public', website=True)
+    # def confirm_booking(self, **kwargs):
+    #     email = kwargs.get('email')
+    #     phone = kwargs.get('phone')
+    #     booking_date = kwargs.get('booking_date')
+    #     room_id = int(kwargs.get('room_id'))
+    #     room_type_id = int(kwargs.get('room_type_id'))
+
+    #     # Create the booking record
+    #     booking = request.env['hotel.booking'].create({
+    #         'email': email,
+    #         'phone': phone,
+    #         'booking_date': booking_date,
+    #         'room_id': room_id,
+    #         'room_type_id': room_type_id,
+    #     })
+
+    #     return True
+
+    @http.route('/confirm_booking', type='http', auth='public', website=True)
+    def confirm_booking(self, **kwargs):
+        email = kwargs.get('email')
+        phone = kwargs.get('phone')
+        booking_date = kwargs.get('booking_date')
+        room_id = int(kwargs.get('room_id'))
+
+        room_type_id = kwargs.get('room_type_id')
+        if room_type_id:
+            room_type_id = int(room_type_id)
+        
+        data={
+            'email': email,
+            'phone': phone,
+            'booking_date': booking_date,
+            'room_id': room_id,
+            'room_type_id': room_type_id,
+            'status': 'confirmed'  # Assuming the booking is confirmed upon submission
+            # Add more fields as needed
+        }
+
+        # Create the booking record
+        booking = request.env['hotel.booking'].create(data)
+
+        return "Booking confirmed successfully"
+   
