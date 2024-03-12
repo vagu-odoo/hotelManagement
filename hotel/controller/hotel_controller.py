@@ -70,7 +70,7 @@ class Hotel(http.Controller):
             'room_id': room_id,
             'room_type_id': room_type_id,
             'status': 'confirmed'  # Assuming the booking is confirmed upon submission
-            # Add more fields as needed
+    
         }
 
         # Create the booking record

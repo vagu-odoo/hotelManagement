@@ -127,7 +127,7 @@
                     <input type="text" id="phone" name="phone" /><br/>
                     <label for="booking_date">Booking Date:</label>
                     <input type="date" id="booking_date" name="booking_date" /><br/>
-                    <!-- Add more fields as needed -->
+                    
                     <button type="submit">Book Now</button>
                 </form>
             </div>

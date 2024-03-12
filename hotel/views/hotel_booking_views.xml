@@ -27,7 +27,7 @@
                 <header>
                     <field name="status" string ="Status" widget="statusbar" statusbar_visible="available ,occupied"/>
                 </header>
-                <sheet>
+                <sheet >
                    
                     <separator/>
                     <group> 
