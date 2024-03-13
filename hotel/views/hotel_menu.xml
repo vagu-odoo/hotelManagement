@@ -2,8 +2,9 @@
 <odoo>
     <menuitem
         id="hotel_menu_root"
-        name="hotel"/>
-
+        name="hotel"
+        web_icon="hotel,static/hotel_logo.png"/>
+        
     <menuitem
         id="hotel_menu_rooms"
         name="rooms"
@@ -12,8 +13,12 @@
     <menuitem
         id="hotel_bookings"
         name="Bookings"
-        parent="hotel_menu_root"/>     
+        parent="hotel_menu_root"/>
 
+     <menuitem
+        id="hotel_services"
+        name="Services"
+        parent="hotel_menu_root"/> 
     <menuitem
         id="hotel_room_test"
         name="All Rooms"
@@ -32,5 +37,11 @@
         parent="hotel_bookings"
         action="hotel_bookings_action"
     />
+    <menuitem 
+        id="hotel_housekeeping_tasks" 
+        name="Housekeeping Tasks"
+        parent="hotel_services"
+        action="action_hotel_housekeeping_tasks" />
+
 
 </odoo>

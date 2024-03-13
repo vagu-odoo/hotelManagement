@@ -18,6 +18,7 @@ class Room(models.Model):
     
     is_booked = fields.Boolean(string='Booked', compute='_compute_is_booked')
     image = fields.Image()
+    housekeeping_tasks = fields.One2many('hotel.housekeeping.task', 'room_id', string='Housekeeping Tasks')
 
     def _compute_is_booked(self):
         for room in self:

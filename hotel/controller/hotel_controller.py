@@ -2,7 +2,7 @@ from odoo import http,api
 from odoo.http import request
 
 class Hotel(http.Controller):
-    @http.route(['/hotel'],auth='public', website=True)
+    @http.route(['/hotel', '/hotel/page/<int:page>'],auth='public', website=True)
     def index(self, **kwargs):
         page = int(kwargs.get('page', 1))   
         rooms = request.env['hotel.room'].search([],)
@@ -11,7 +11,9 @@ class Hotel(http.Controller):
             url='/hotel',total = total_rooms,page=page,step=6
         )
         offset = pager['offset']
+        # offset = (page - 1) * 6
         rooms = rooms[offset: offset + 6]
+        print(rooms)
         return http.request.render('hotel.rooms_page_view',{
             'rooms':rooms,
             'pager':pager

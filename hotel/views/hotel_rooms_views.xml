@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
     <record id="hotel_rooms_action" model="ir.actions.act_window">
-        <field name="name">test</field>
+        <field name="name">Rooms</field>
         <field name="res_model">hotel.room</field>
         <field name="view_mode">tree,form</field>
     </record>    
@@ -28,7 +28,6 @@
             <form string="Room Details">
                 <header>
                     <button name="action_set_room_book" type="object" string="BOOK"/>
-                    <button name="action_set_room_unbook" type="object" string="Cancel"/>
                     <field name="status" string ="Status" widget="statusbar" statusbar_visible="available ,occupied"/>
                 </header>
                 <sheet>

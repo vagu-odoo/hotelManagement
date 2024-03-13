@@ -38,7 +38,7 @@
                 <div
                                 class="products_pager form-inline justify-content-center mt-3">
                                 <t t-call="website.pager">
-                                    <t t-set="_classes">mt-2 ml-md-2</t>
+                                    <!-- <t t-set="_classes">mt-2 ml-md-2</t> -->
                                 </t>
                             </div>
             </section>
@@ -134,6 +134,7 @@
         </div>
     </t>
 </template>
+
 
 
 
