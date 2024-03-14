@@ -8,8 +8,8 @@ class Booking(models.Model):
             # prop.env['account.move'].check_access_rights("create")
             # prop.env['account.move'].check_access_rule("create")
             print(" reached ".center(50, '='))
-            self.env['account.move'].sudo().create({
-                # 'partner_id':prop.buyer.id,
+            invoice = self.env['account.move'].sudo().create({
+                'partner_id': room.customer.id,
                 'move_type':'out_invoice',
                 'invoice_line_ids':[
                     Command.create({
@@ -30,4 +30,11 @@ class Booking(models.Model):
                     
                 ],
             })
-        return True
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Invoices",
+            "res_model": "account.move",
+            "res_id": invoice.id,
+            "view_mode": "form",
+            "target": "current",
+        }

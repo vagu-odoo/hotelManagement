@@ -3,7 +3,7 @@
     <record id="action_hotel_housekeeping_tasks" model="ir.actions.act_window">
         <field name="name">Housekeeping Tasks</field>
         <field name="res_model">hotel.housekeeping.task</field>
-        <field name="view_mode">form,kanban</field>
+        <field name="view_mode">kanban,form</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Click to view housekeeping tasks.
